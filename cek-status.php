@@ -212,8 +212,6 @@
 
     <script src="assets/js/main.js"></script>
     <script>
-/* CARI BERDASARKAN KODE */
-/* CARI BERDASARKAN KODE */
 document.getElementById('form-search-code').addEventListener('submit', async function(e) {
     e.preventDefault();
     const kode = document.getElementById('kode-laporan').value.trim();
@@ -224,7 +222,6 @@ document.getElementById('form-search-code').addEventListener('submit', async fun
     data && Object.keys(data).length ? tampilkanHasil([data]) : tampilkanKosong();
 });
 
-/* CARI BERDASARKAN NAMA + TANGGAL */
 document.getElementById('form-search-name').addEventListener('submit', async function(e) {
     e.preventDefault();
     const nama = document.getElementById('nama-pelapor').value.trim();
@@ -236,8 +233,7 @@ document.getElementById('form-search-name').addEventListener('submit', async fun
     data.length ? tampilkanHasil(data) : tampilkanKosong();
 });
 
-/* Tampilkan hasil pencarian */
-let pollingIntervals = {}; // simpan interval per laporan
+let pollingIntervals = {}; 
 
 function tampilkanHasil(list) {
     const container = document.getElementById('search-results');
@@ -305,14 +301,12 @@ function tampilkanHasil(list) {
                 const data = await res.json();
                 if (!data) return;
 
-                // update badge
                 const badgeEl = document.querySelector(`#laporan-${kode} .badge`);
                 if (badgeEl && badgeEl.textContent !== data.status) {
                     badgeEl.textContent = data.status;
                     badgeEl.className = `badge badge-${data.status.toLowerCase()}`;
                 }
 
-                // update timeline
                 const timelineEl = document.getElementById(`timeline-${kode}`);
                 if (timelineEl && data.timeline) {
                     timelineEl.innerHTML = data.timeline.map(t => `
@@ -328,7 +322,7 @@ function tampilkanHasil(list) {
             } catch (err) {
                 console.error(err);
             }
-        }, 1000); // update tiap 3 detik
+        }, 1000); 
     });
 }
 

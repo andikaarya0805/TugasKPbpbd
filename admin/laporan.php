@@ -158,7 +158,6 @@
 <?php
 include '../config/database.php';
 
-// Ambil semua data laporan
 $query = mysqli_query($koneksi, "SELECT * FROM tb_laporan ORDER BY tanggal_lapor DESC");
 if (!$query) {
     die("Query Error: " . mysqli_error($koneksi));
@@ -225,7 +224,6 @@ while ($row = mysqli_fetch_assoc($query)) :
     <script src="../assets/js/main.js"></script>
     <script>
         function exportCSV(type) {
-            // Generate CSV content
             const table = document.getElementById('table-preview');
             let csv = [];
             const rows = table.querySelectorAll('tr');
@@ -250,7 +248,6 @@ while ($row = mysqli_fetch_assoc($query)) :
         }
         
         function exportPDF(type) {
-            // In real implementation, this would generate a PDF
             alert(`Fitur export PDF untuk ${type} akan menggunakan library seperti jsPDF atau server-side PDF generation.`);
         }
     </script>

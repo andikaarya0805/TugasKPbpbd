@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Ambil data dari form
 $nama = trim($_POST['nama_pelapor'] ?? '');
 $no_hp = trim($_POST['no_hp'] ?? '');
 $alamat = trim($_POST['alamat'] ?? '');
@@ -19,7 +18,6 @@ $jenis_bencana = trim($_POST['jenis_bencana'] ?? '');
 $jenis_kerusakan = trim($_POST['jenis_kerusakan'] ?? '-');
 $deskripsi = trim($_POST['deskripsi'] ?? '');
 
-// Handle upload foto
 $fotoName = null;
 if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
     if (!is_dir("uploads")) mkdir("uploads", 0777, true);
@@ -28,12 +26,8 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
     move_uploaded_file($_FILES['foto']['tmp_name'], "uploads/" . $fotoName);
 }
 
-// Generate kode laporan
 $kode_laporan = "LAP-" . date("Y") . "-" . str_pad(rand(0, 9999), 4, "0", STR_PAD_LEFT);
 
-// ==============================
-// INSERT DATA KE tb_laporan
-// ==============================
 $stmt = $koneksi->prepare("
     INSERT INTO tb_laporan 
     (kode_laporan, nama_pelapor, no_hp, alamat, latitude, longitude,
@@ -41,7 +35,6 @@ $stmt = $koneksi->prepare("
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Menunggu')
 ");
 
-// Bind semua sebagai string, latitude/longitude pakai NULL jika kosong
 $stmt->bind_param(
     "ssssssssss",
     $kode_laporan,
@@ -63,9 +56,6 @@ if (!$stmt->execute()) {
 
 $id_laporan = $koneksi->insert_id;
 
-// ==============================
-// INSERT LOG AKTIVITAS
-// ==============================
 $aksi = "Input Laporan";
 $keterangan = "Data laporan berhasil diinput";
 $id_admin = null; // user biasa
@@ -77,7 +67,6 @@ $stmt2 = $koneksi->prepare("
     VALUES (?, ?, ?, ?, ?, ?)
 ");
 
-// Bind id_admin sebagai NULL jika kosong
 $id_admin_param = $id_admin;
 $stmt2->bind_param("iissss", $id_admin_param, $id_laporan, $aksi, $keterangan, $ip_address, $tanggal);
 

@@ -983,10 +983,11 @@ textarea.form-control {
 .sidebar-footer {
   padding: 20px;
   border-top: 1px solid var(--secondary-light);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative; /* ubah dari absolute */
+  bottom: auto;
+  left: auto;
+  right: auto;
+  width: 100%;
 }
 
 .admin-user {

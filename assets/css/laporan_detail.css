@@ -1,0 +1,204 @@
+/* laporan_detail.css */
+
+/* Root colors sesuai tema orange BPBD */
+:root {
+    --primary: #ea580c;
+    --primary-dark: #c2410c;
+    --primary-light: #fb923c;
+    --secondary: #1e293b;
+    --secondary-light: #334155;
+    --bg-card: #ffffff;
+    --bg-page: #f8f8f8;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--secondary);
+    margin: 0;
+    padding: 20px;
+}
+
+/* Card utama */
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    transition: box-shadow var(--transition-speed);
+}
+
+.card:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.card h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: var(--primary-dark);
+}
+
+/* Info laporan */
+.card p {
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
+.card p strong {
+    color: var(--primary);
+}
+
+/* Riwayat status */
+.card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card ul li {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    background-color: #f3f4f6;
+    border-left: 4px solid var(--primary);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card ul li:last-child {
+    margin-bottom: 0;
+}
+
+.card ul li span.date {
+    font-size: 0.85rem;
+    color: var(--secondary-light);
+}
+
+/* Form input */
+.card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.card form label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--primary-dark);
+}
+
+.card form .form-control {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: border-color var(--transition-speed);
+}
+
+.card form .form-control:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(234,88,12,0.2);
+}
+
+/* Button */
+.card button.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.card button.btn-success {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.card button.btn-success:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.card button.btn-primary {
+    background-color: var(--primary-light);
+    color: var(--secondary);
+}
+
+.card button.btn-primary:hover {
+    background-color: var(--primary);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card {
+        padding: 15px;
+    }
+}
+
+/* Timeline container */
+.timeline-laporan {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+/* Setiap item timeline */
+.timeline-laporan-item {
+    position: relative;
+    padding-left: 150px; /* space for time */
+    margin-bottom: 15px;
+}
+
+/* Bulatan kecil sebagai titik timeline */
+.timeline-laporan-item::before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary, #ea580c);
+    border-radius: 50%;
+}
+
+/* Waktu di kiri */
+.timeline-laporan-time {
+    position: absolute;
+    right: 0;
+    width: 140px;
+    font-size: 0.8rem;
+    color: #64748b; /* abu-abu */
+}
+
+/* Konten timeline (status/catatan/petugas) */
+.timeline-laporan-content {
+    display: inline-block;
+    background: #f1f5f9;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+/* Highlight status terakhir */
+.timeline-laporan-item.active .timeline-laporan-content {
+    background: var(--primary, #ea580c);
+    color: #fff;
+}
+
+/* Optional: responsive tweak */
+@media screen and (max-width: 480px) {
+    .timeline-laporan-item {
+        padding-left: 100px;
+    }
+    .timeline-laporan-time {
+        width: 90px;
+        font-size: 0.75rem;
+    }
+}

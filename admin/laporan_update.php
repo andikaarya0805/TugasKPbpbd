@@ -2,13 +2,11 @@
 session_start();
 include '../config/database.php';
 
-// Pastikan request POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: laporan.php?msg=invalid_request");
     exit;
 }
 
-// Validasi data wajib
 if (!isset($_POST['id'], $_POST['status'])) {
     header("Location: laporan.php?msg=missing_params");
     exit;
@@ -17,13 +15,11 @@ if (!isset($_POST['id'], $_POST['status'])) {
 $id_laporan = $_POST['id'];
 $status = $_POST['status'];
 
-// 1️⃣ Update status laporan
 $stmt = $koneksi->prepare("UPDATE tb_laporan SET status = ? WHERE id_laporan = ?");
 $stmt->bind_param("si", $status, $id_laporan);
 
 if ($stmt->execute()) {
-    // 2️⃣ Simpan log aktivitas
-    $id_admin = $_SESSION['id_admin'] ?? null; // bisa null jika bukan login admin
+    $id_admin = $_SESSION['id_admin'] ?? null; 
     $aksi = "Update Status";
     $keterangan = "Status laporan diubah menjadi $status";
     $ip_address = $_SERVER['REMOTE_ADDR'] ?? '';

@@ -3,11 +3,9 @@ session_start();
 include '../config/database.php';
 
 if (isset($_SESSION['id_admin'])) {
-    // Jangan langsung header() kalau pakai fetch, biarkan JS handle
     $message = 'already_logged_in';
 }
 
-// Jika POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
@@ -153,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="checkbox" name="remember">
                             <span style="font-size: 0.875rem;">Ingat saya</span>
                         </label>
-                        <a href="#" style="font-size: 0.875rem; color: var(--primary);">Lupa password?</a>
+                        <a href="reset_password.php" style="font-size: 0.875rem; color: var(--primary);">Lupa password?</a>
                     </div>
                     
                     <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 20px;">
@@ -186,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .then(res => res.json())
     .then(data => {
         if (data.message === 'success') {
-            window.location.href = 'dashboard.php'; // redirect JS
+            window.location.href = 'dashboard.php'; 
         } else if (data.message === 'already_logged_in') {
             window.location.href = 'dashboard.php';
         } else {

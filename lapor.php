@@ -286,12 +286,11 @@
     const form = this;
     const formData = new FormData(form);
 
-    // ambil file foto bila ada
     const foto = document.getElementById("foto").files[0];
     if (foto) {
         formData.set("foto", foto);
     } else {
-        formData.delete("foto"); // pastikan tidak memaksa file kosong
+        formData.delete("foto");
     }
 
     try {

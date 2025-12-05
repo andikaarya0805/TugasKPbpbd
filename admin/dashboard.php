@@ -108,8 +108,6 @@
     </div>
 
 </div>
-
-
                 
                 <!-- Quick Actions -->
                 <h3 style="margin-bottom: 20px;">Aksi Cepat</h3>
@@ -268,9 +266,7 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- <script src="../assets/js/admin.js"></script> -->
-    <script>
-        // Initialize map
+        <script>
         document.addEventListener('DOMContentLoaded', function() {
             const map = L.map('map-preview').setView([-6.2, 106.8], 10);
             
@@ -278,7 +274,6 @@
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
             
-            // Sample markers
             const locations = [
                 { lat: -6.2615, lng: 106.8106, title: 'Banjir - Jakarta Selatan', type: 'Banjir' },
                 { lat: -6.9271, lng: 107.6131, title: 'Longsor - Bandung', type: 'Tanah Longsor' },
@@ -297,7 +292,6 @@
         //update data dashboard stats from API
 document.addEventListener("DOMContentLoaded", () => {
 
-    // === UPDATE ANGKA STATISTIK UTAMA ===
     setInterval(() => {
         fetch("/kpfinal1/public/api_dashboard.php")
             .then(res => res.json())
@@ -308,10 +302,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("selesai").innerText = data.selesai ?? 0;
             })
             .catch(err => console.error("Dashboard Error:", err));
-    }, 2000);
+    }, 1000);
 
-
-    // === UPDATE STATISTIK BENCANA ===
     setInterval(() => {
         fetch("/kpfinal1/public/api_statistik_bencana.php")
             .then(res => res.json())
@@ -323,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("bencana-lainnya").innerText = data.Lainnya ?? 0;
             })
             .catch(err => console.error("Bencana Error:", err));
-    }, 2000);
+    }, 1000);
 
 });
 
